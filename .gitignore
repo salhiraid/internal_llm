@@ -1,0 +1,28 @@
+# Secrets
+.env
+.env.local
+*.pem
+*.key
+
+# Models and data
+models/
+*.gguf
+open-webui-data/
+grafana-data/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# macOS
+.DS_Store
+
+# Local work dirs
+staging/
+backups/
+logs/
+
+# Git noise
+*.swp
+*.swo
