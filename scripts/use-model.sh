@@ -6,7 +6,7 @@ if [ $# -ne 1 ]; then
   exit 1
 fi
 
-BASE_DIR="$HOME/internal-llm"
+BASE_DIR="${INTERNAL_LLM_HOME:-$HOME/internal-llm}"
 MODELS_DIR="$BASE_DIR/models"
 BACKUPS_DIR="$BASE_DIR/backups"
 LINK_PATH="$MODELS_DIR/model.gguf"

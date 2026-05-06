@@ -90,7 +90,7 @@ services:
       - ./monitoring/blackbox.yml:/etc/prometheus/blackbox.yml:ro
 
   blackbox-exporter:
-    image: quay.io/prometheus/blackbox-exporter:latest
+    image: prom/blackbox-exporter:latest
     container_name: internal-llm-blackbox
     restart: unless-stopped
     command:
