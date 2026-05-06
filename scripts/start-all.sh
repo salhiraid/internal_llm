@@ -6,6 +6,7 @@ BASE_DIR="${INTERNAL_LLM_HOME:-$(cd "$SCRIPT_DIR/.." && pwd)}"
 IMAGE_DIR="${INTERNAL_LLM_IMAGE_DIR:-/opt/docker-images}"
 AUTOLOAD_IMAGES="${INTERNAL_LLM_AUTOLOAD_IMAGES:-1}"
 ALLOW_NO_DNS="${INTERNAL_LLM_ALLOW_NO_DNS:-1}"
+STARTED_WITH_DNS=0
 
 "$BASE_DIR/scripts/stop-llama.sh" || true
 
@@ -41,9 +42,18 @@ else
   else
     echo "Port 53 is free; starting stack with dns profile enabled."
     docker compose --profile dns up -d --pull never
+    STARTED_WITH_DNS=1
   fi
 fi
 
 echo "Open WebUI local fallback: http://localhost:3000"
 echo "Team URL: https://llm.internal.local"
 echo "Grafana URL: https://grafana.internal.local"
+if [ "$STARTED_WITH_DNS" = "0" ]; then
+  LAN_IP_VALUE="$(grep -E '^LAN_IP=' "$BASE_DIR/open-webui/.env" 2>/dev/null | head -n1 | cut -d= -f2- || true)"
+  echo "Note: dns container is not running."
+  if [ -n "$LAN_IP_VALUE" ]; then
+    echo "Add this hosts entry on client machines if needed:"
+    echo "  $LAN_IP_VALUE llm.internal.local grafana.internal.local prometheus.internal.local"
+  fi
+fi
