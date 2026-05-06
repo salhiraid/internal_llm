@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-BASE_DIR="$HOME/internal-llm"
+BASE_DIR="${INTERNAL_LLM_HOME:-$HOME/internal-llm}"
 MODEL_LINK="$BASE_DIR/models/model.gguf"
 LOG_DIR="$BASE_DIR/logs"
 LOG_FILE="$LOG_DIR/llama-server.log"
