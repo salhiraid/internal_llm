@@ -425,6 +425,17 @@ Set the internal LLM DNS name:
 LLM_HOSTNAME=llm.internal.local
 ```
 
+### TLS cert file names for NGINX
+
+NGINX now renders config from a template, so you can move this repo to any machine and just change `.env` values (no hardcoded hostnames in nginx config).
+
+```dotenv
+NGINX_CERT_FILE=internal.local.pem
+NGINX_CERT_KEY_FILE=internal.local-key.pem
+```
+
+These files must exist in `certs/` (mounted as `/etc/nginx/certs`).
+
 ### `GRAFANA_HOSTNAME`
 
 Set the Grafana DNS name:
