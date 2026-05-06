@@ -397,6 +397,18 @@ Usually keep this the same as the model filename:
 LLAMA_MODEL_ALIAS=Llama-3.2-3B-Instruct-Q4_K_M.gguf
 ```
 
+### `LLAMA_CTX_SIZE`
+
+If you see errors like `request (...) exceeds the available context size (...)`, increase context size.
+
+Start with:
+
+```dotenv
+LLAMA_CTX_SIZE=8192
+```
+
+If your GPU has enough VRAM, you can try larger values (e.g. `12288` or `16384`). If VRAM is limited, reduce context size.
+
 ### `LAN_IP`
 
 Set the real Ubuntu server LAN IP:

@@ -31,7 +31,7 @@ services:
       - --port
       - "8080"
       - --ctx-size
-      - "4096"
+      - "${LLAMA_CTX_SIZE:-8192}"
       - --parallel
       - "2"
       - --n-gpu-layers
