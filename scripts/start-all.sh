@@ -2,6 +2,9 @@
 set -euo pipefail
 
 BASE_DIR="${INTERNAL_LLM_HOME:-$HOME/internal-llm}"
+IMAGE_DIR="${INTERNAL_LLM_IMAGE_DIR:-/opt/docker-images}"
+AUTOLOAD_IMAGES="${INTERNAL_LLM_AUTOLOAD_IMAGES:-1}"
+ALLOW_NO_DNS="${INTERNAL_LLM_ALLOW_NO_DNS:-0}"
 
 "$BASE_DIR/scripts/stop-llama.sh" || true
 
