@@ -203,6 +203,42 @@ Create the real environment file from the example:
 cp .env.example /opt/internal-llm/open-webui/.env
 ```
 
+## Alternative: run directly from the cloned repo (no `/opt` copy)
+
+If you prefer to run everything from your clone path (for example `~/internal_llm`) and skip copying files into `/opt/internal-llm`, use this flow:
+
+```bash
+cd ~/internal_llm
+mkdir -p open-webui/nginx open-webui/dns open-webui/monitoring
+cp deploy/docker-compose.yml open-webui/docker-compose.yml
+cp deploy/nginx/nginx.conf open-webui/nginx/nginx.conf
+cp deploy/dns/Corefile open-webui/dns/Corefile
+cp deploy/monitoring/prometheus.yml open-webui/monitoring/prometheus.yml
+cp deploy/monitoring/blackbox.yml open-webui/monitoring/blackbox.yml
+cp .env.example open-webui/.env
+mkdir -p models certs backups logs
+```
+
+Set the base path variable so scripts target this clone:
+
+```bash
+export INTERNAL_LLM_HOME="$PWD"
+```
+
+Optional startup variables:
+
+```bash
+export INTERNAL_LLM_IMAGE_DIR="/opt/docker-images"   # where *.tar images are stored
+export INTERNAL_LLM_AUTOLOAD_IMAGES="1"              # auto docker load from INTERNAL_LLM_IMAGE_DIR
+export INTERNAL_LLM_ALLOW_NO_DNS="1"                 # start without dns profile if port 53 is in use
+```
+
+Then run:
+
+```bash
+./scripts/start-all.sh
+```
+
 ## 6. Create a Python virtual environment for model downloads
 
 ```bash
