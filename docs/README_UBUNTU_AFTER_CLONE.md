@@ -358,6 +358,29 @@ For team onboarding with admin review:
 DEFAULT_USER_ROLE=pending
 ```
 
+### Team account creation flow (recommended)
+
+Use this combination in `.env`:
+
+```dotenv
+ENABLE_SIGNUP=true
+DEFAULT_USER_ROLE=pending
+```
+
+What happens next:
+
+1. Team member opens `https://llm.internal.local` (or `http://<server-ip>:3000` fallback) and clicks **Sign Up**.
+2. Their account is created in **pending** state (cannot use models until approved).
+3. Admin logs in with `WEBUI_ADMIN_EMAIL` and opens **Admin Panel → Users**.
+4. Admin changes the new user role from `pending` to `user` (or `admin` if needed).
+
+If users cannot see the **Sign Up** button, check `ENABLE_SIGNUP=true` in `.env` and restart the stack:
+
+```bash
+cd open-webui
+docker compose up -d --pull never
+```
+
 ### `LLAMA_MODEL_FILE`
 
 This must exactly match the GGUF filename you downloaded:
