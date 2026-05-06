@@ -230,7 +230,8 @@ Optional startup variables:
 ```bash
 export INTERNAL_LLM_IMAGE_DIR="/opt/docker-images"   # where *.tar images are stored
 export INTERNAL_LLM_AUTOLOAD_IMAGES="1"              # auto docker load from INTERNAL_LLM_IMAGE_DIR
-export INTERNAL_LLM_ALLOW_NO_DNS="1"                 # start without dns profile if port 53 is in use
+export INTERNAL_LLM_ENABLE_DNS="0"                   # default: do not start dns container
+export INTERNAL_LLM_STRICT_DNS="0"                   # if ENABLE_DNS=1 and port 53 is busy, fallback instead of fail
 ```
 
 Then run:
