@@ -2,9 +2,6 @@
 set -euo pipefail
 
 BASE_DIR="${INTERNAL_LLM_HOME:-$HOME/internal-llm}"
-IMAGE_DIR="${INTERNAL_LLM_IMAGE_DIR:-/opt/docker-images}"
-AUTOLOAD_IMAGES="${INTERNAL_LLM_AUTOLOAD_IMAGES:-1}"
-ALLOW_NO_DNS="${INTERNAL_LLM_ALLOW_NO_DNS:-0}"
 
 "$BASE_DIR/scripts/stop-llama.sh" || true
 
@@ -36,6 +33,7 @@ if ss -ltn "( sport = :53 )" 2>/dev/null | grep -q ":53" || ss -lun "( sport = :
 else
   docker compose up -d
 fi
+docker compose up -d
 
 echo "Open WebUI local fallback: http://localhost:3000"
 echo "Team URL: https://llm.internal.local"
