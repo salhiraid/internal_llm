@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-"$HOME/internal-llm/scripts/stop-llama.sh" || true
+BASE_DIR="${INTERNAL_LLM_HOME:-$HOME/internal-llm}"
 
-cd "$HOME/internal-llm/open-webui"
+"$BASE_DIR/scripts/stop-llama.sh" || true
+
+cd "$BASE_DIR/open-webui"
 docker compose up -d
 
 echo "Open WebUI local fallback: http://localhost:3000"

@@ -6,7 +6,7 @@ if [ $# -lt 2 ] || [ $# -gt 3 ]; then
   exit 1
 fi
 
-BASE_DIR="$HOME/internal-llm"
+BASE_DIR="${INTERNAL_LLM_HOME:-$HOME/internal-llm}"
 HF_BIN="$BASE_DIR/.venv/bin/hf"
 MODELS_DIR="$BASE_DIR/models"
 REPO="$1"
