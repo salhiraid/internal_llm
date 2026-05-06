@@ -7,10 +7,20 @@ services:
     image: ghcr.io/ggml-org/llama.cpp:server
     container_name: internal-llm-llama-cpp
     restart: unless-stopped
+    gpus: "device=0"
+    environment:
+      NVIDIA_VISIBLE_DEVICES: "0"
     ports:
       - "127.0.0.1:8080:8080"
     volumes:
       - ../models:/models:ro
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: ["0"]
+              capabilities: [gpu]
     command:
       - -m
       - /models/${LLAMA_MODEL_FILE}
@@ -90,7 +100,7 @@ services:
       - ./monitoring/blackbox.yml:/etc/prometheus/blackbox.yml:ro
 
   blackbox-exporter:
-    image: quay.io/prometheus/blackbox-exporter:latest
+    image: prom/blackbox-exporter:latest
     container_name: internal-llm-blackbox
     restart: unless-stopped
     command:
