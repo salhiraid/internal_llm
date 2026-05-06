@@ -36,6 +36,7 @@ if ss -ltn "( sport = :53 )" 2>/dev/null | grep -q ":53" || ss -lun "( sport = :
 else
   docker compose up -d
 fi
+docker compose up -d
 
 echo "Open WebUI local fallback: http://localhost:3000"
 echo "Team URL: https://llm.internal.local"
