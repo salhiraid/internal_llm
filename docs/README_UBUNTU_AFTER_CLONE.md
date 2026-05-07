@@ -427,7 +427,7 @@ LLM_HOSTNAME=llm.internal.local
 
 ### TLS cert file names for NGINX
 
-NGINX now renders config from a template, so you can move this repo to any machine and just change `.env` values (no hardcoded hostnames in nginx config).
+NGINX uses a static `deploy/nginx/nginx.conf` file by default. If you change hostnames/cert names, update that file to match your environment.
 
 ```dotenv
 NGINX_CERT_FILE=internal.local.pem

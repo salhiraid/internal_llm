@@ -72,17 +72,8 @@ services:
     ports:
       - "80:80"
       - "443:443"
-    environment:
-      LLM_HOSTNAME: "${LLM_HOSTNAME}"
-      GRAFANA_HOSTNAME: "${GRAFANA_HOSTNAME}"
-      NGINX_CERT_FILE: "${NGINX_CERT_FILE:-internal.local.pem}"
-      NGINX_CERT_KEY_FILE: "${NGINX_CERT_KEY_FILE:-internal.local-key.pem}"
-    command:
-      - /bin/sh
-      - -c
-      - envsubst '$$LLM_HOSTNAME $$GRAFANA_HOSTNAME $$NGINX_CERT_FILE $$NGINX_CERT_KEY_FILE' < /etc/nginx/templates/nginx.conf.template > /etc/nginx/nginx.conf && exec nginx -g 'daemon off;'
     volumes:
-      - ./nginx/nginx.conf.template:/etc/nginx/templates/nginx.conf.template:ro
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - ../certs:/etc/nginx/certs:ro
 
   dns:
