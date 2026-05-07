@@ -425,29 +425,6 @@ Set the internal LLM DNS name:
 LLM_HOSTNAME=llm.internal.local
 ```
 
-### TLS cert file names for NGINX
-
-NGINX uses a static `deploy/nginx/nginx.conf` file by default. If you change hostnames/cert names, update that file to match your environment.
-
-```dotenv
-NGINX_CERT_FILE=internal.local.pem
-NGINX_CERT_KEY_FILE=internal.local-key.pem
-```
-
-These files must exist in `certs/` (mounted as `/etc/nginx/certs`).
-
-If you see warnings like `NGINX_CERT_FILE variable is not set`, create/update `open-webui/.env` from `.env.example` and set these values:
-
-```bash
-cp .env.example open-webui/.env
-```
-
-```dotenv
-NGINX_CERT_FILE=internal.local.pem
-NGINX_CERT_KEY_FILE=internal.local-key.pem
-```
-
-
 ### `GRAFANA_HOSTNAME`
 
 Set the Grafana DNS name:
