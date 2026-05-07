@@ -436,6 +436,18 @@ NGINX_CERT_KEY_FILE=internal.local-key.pem
 
 These files must exist in `certs/` (mounted as `/etc/nginx/certs`).
 
+If you see warnings like `NGINX_CERT_FILE variable is not set`, create/update `open-webui/.env` from `.env.example` and set these values:
+
+```bash
+cp .env.example open-webui/.env
+```
+
+```dotenv
+NGINX_CERT_FILE=internal.local.pem
+NGINX_CERT_KEY_FILE=internal.local-key.pem
+```
+
+
 ### `GRAFANA_HOSTNAME`
 
 Set the Grafana DNS name:
