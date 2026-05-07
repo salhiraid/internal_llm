@@ -9,6 +9,12 @@ ENABLE_DNS="${INTERNAL_LLM_ENABLE_DNS:-0}"
 STRICT_DNS="${INTERNAL_LLM_STRICT_DNS:-0}"
 STARTED_WITH_DNS=0
 
+# Prevent accidental DNS startup from inherited COMPOSE_PROFILES=dns
+if [ "$ENABLE_DNS" != "1" ]; then
+  unset COMPOSE_PROFILES || true
+fi
+
+
 "$BASE_DIR/scripts/stop-llama.sh" || true
 
 cd "$BASE_DIR/open-webui"

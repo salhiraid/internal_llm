@@ -799,3 +799,8 @@ After cloning this repo on Ubuntu, the flow is:
 8. verify local URLs
 9. point team DNS to the Ubuntu box
 10. import the internal CA on team machines
+
+
+### DNS profile safety note
+
+If `COMPOSE_PROFILES=dns` is exported in your shell, Docker Compose may try to start the `dns` service and fail on hosts where port 53 is occupied. `scripts/start-all.sh` now clears inherited compose profiles unless `INTERNAL_LLM_ENABLE_DNS=1` is explicitly set.
